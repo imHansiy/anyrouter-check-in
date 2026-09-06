@@ -17,6 +17,8 @@ jobs:
     env:
       PYTHONIOENCODING: utf-8
       PYTHONUNBUFFERED: 1
+      # Avoid background update requests racing with installer shutdown.
+      CLOAKBROWSER_AUTO_UPDATE: 'false'
       DEBUG_MODE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug == 'true' && 'true' || 'false' }}
     steps:
     - uses: actions/checkout@v6

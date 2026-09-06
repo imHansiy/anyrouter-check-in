@@ -274,7 +274,8 @@ async def prepare_cookies(account_name: str, provider_config, user_cookies: dict
 	else:
 		print(f'[INFO] {account_name}: Bypass WAF not required, using user cookies directly')
 
-	return {**waf_cookies, **user_cookies}
+	# WAF cookies are refreshed for this runner; copied browser values may be stale.
+	return {**user_cookies, **waf_cookies}
 
 
 def execute_check_in(client, account_name: str, provider_config, headers: dict):
